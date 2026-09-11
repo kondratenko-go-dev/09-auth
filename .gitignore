@@ -27,4 +27,5 @@ dist-ssr
 
 # Env vars
 .env*
-!.env.exampletsconfig.tsbuildinfo
+!.env.example
+tsconfig.tsbuildinfo
