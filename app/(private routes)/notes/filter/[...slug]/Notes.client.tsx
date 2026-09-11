@@ -3,17 +3,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
-import { fetchNotes } from '@/lib/api';
-import NoteList from '../../../../components/NoteList/NoteList';
-import Pagination from '../../../../components/Pagination/Pagination';
-import SearchBox from '../../../../components/SearchBox/SearchBox';
+import { fetchNotes } from '@/lib/api/clientApi';
+import NoteList from '@/components/NoteList/NoteList';
+import Pagination from '@/components/Pagination/Pagination';
+import SearchBox from '@/components/SearchBox/SearchBox';
 import css from './Notes.module.css';
 
 interface NotesClientProps {
   tag?: string;
 }
-
-const PER_PAGE = 12;
 
 const NotesClient = ({ tag }: NotesClientProps) => {
   const [page, setPage] = useState(1);
@@ -24,7 +22,7 @@ const NotesClient = ({ tag }: NotesClientProps) => {
   }, 300);
   const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', page, search, tag],
-    queryFn: () => fetchNotes({ page, perPage: PER_PAGE, search, tag }),
+    queryFn: () => fetchNotes({ page, search, tag }),
     placeholderData: keepPreviousData,
   });
   return (

@@ -5,10 +5,8 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/serverApi';
 import NotesClient from './Notes.client';
-
-const PER_PAGE = 12;
 
 interface NotesPageProps {
   params: Promise<{
@@ -58,7 +56,6 @@ const Notes = async ({ params }: NotesPageProps) => {
     queryFn: () =>
       fetchNotes({
         page: 1,
-        perPage: PER_PAGE,
         search: '',
         tag,
       }),
