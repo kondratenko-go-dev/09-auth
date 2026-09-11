@@ -42,14 +42,20 @@ export default async function proxy(request: NextRequest) {
 
         for (const cookieString of cookieArray) {
           const parsed = parseSetCookie(cookieString);
-
-          if (parsed.value) {
-            response.cookies.set(parsed.name, parsed.value, {
-              path: parsed.path,
-              maxAge: parsed.maxAge,
-              expires: parsed.expires,
-            });
+          
+          if (!parsed.name || !parsed.value) {
+            continue;
           }
+
+          response.cookies.set(parsed.name, parsed.value, {
+            path: parsed.path,
+            maxAge: parsed.maxAge,
+            expires: parsed.expires,
+            domain: parsed.domain,
+            httpOnly: parsed.httpOnly,
+            secure: parsed.secure,
+            sameSite: parsed.sameSite,
+          });
         }
 
         return response;
