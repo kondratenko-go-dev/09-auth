@@ -7,7 +7,7 @@ import css from './Header.module.css';
 const Header = () => {
   return (
     <header className={css.header}>
-      <Link href="/" aria-label="Home">
+      <Link href="/" className={css.logo} aria-label="Home">
         NoteHub
       </Link>
 
