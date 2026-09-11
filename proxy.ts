@@ -21,7 +21,7 @@ export default async function proxy(request: NextRequest) {
   // Case 1: access token is valid — user is logged in
   if (accessToken) {
     if (isPublicRoute) {
-      return NextResponse.redirect(new URL('/profile', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
 
     return NextResponse.next();
@@ -37,7 +37,7 @@ export default async function proxy(request: NextRequest) {
         const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
 
         const response = isPublicRoute
-          ? NextResponse.redirect(new URL('/profile', request.url))
+          ? NextResponse.redirect(new URL('/', request.url))
           : NextResponse.next();
 
         for (const cookieString of cookieArray) {
